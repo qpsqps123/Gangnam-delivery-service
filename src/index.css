@@ -12,3 +12,14 @@ body {
   margin: 0;
   background-color: #3f3f3f;
 }
+
+.a11y-hidden {
+  margin: 0;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: polygon(0 0, 0 0, 0 0);
+  clip: rect(0 0 0 0);
+  clip: rect(0, 0, 0, 0);
+}
