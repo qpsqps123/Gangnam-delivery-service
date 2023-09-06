@@ -4,7 +4,7 @@ const MealItemForm = () => {
   return (
     <form>
       <Input />
-      <button></button>
+      <button>add</button>
     </form>
   );
 };
