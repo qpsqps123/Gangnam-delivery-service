@@ -10,10 +10,12 @@ const Header = () => {
     <>
       <header className={classes.header}>
         <h1 className="a11y-hidden">Perth Gangnam restaurant</h1>
-        <img src={gangnamLogo} alt="Gangnam restaurant logo." />
+        <a href="/">
+          <img src={gangnamLogo} alt="Gangnam restaurant logo." />
+        </a>
         <HeaderCartButton />
       </header>
-      <div>
+      <div className={classes["main-image"]}>
         <img src={mealsImage} alt="A table full of delicious Korean food." />
       </div>
     </>
