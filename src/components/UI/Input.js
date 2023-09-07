@@ -1,7 +1,7 @@
 const Input = () => {
   return (
     <div>
-      <label></label>
+      <label>Amount</label>
       <input />
     </div>
   );
