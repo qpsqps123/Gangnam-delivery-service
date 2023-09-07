@@ -1,7 +1,7 @@
 import { createPortal } from "react-dom";
 
-const Backdrop = () => {
-  return <div>backdrop</div>;
+const Backdrop = ({ onCloseModal }) => {
+  return <div onClick={onCloseModal}>backdrop</div>;
 };
 
 const ModalOverlay = () => {
@@ -10,10 +10,10 @@ const ModalOverlay = () => {
 
 const portalElement = document.getElementById("overlay");
 
-const Modal = () => {
+const Modal = ({ onCloseModal }) => {
   return (
     <>
-      {createPortal(<Backdrop />, portalElement)}
+      {createPortal(<Backdrop onCloseModal={onCloseModal} />, portalElement)}
       {createPortal(<ModalOverlay />, portalElement)}
     </>
   );

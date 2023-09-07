@@ -5,7 +5,7 @@ import classes from "./Header.module.css";
 import mealsImage from "../../assets/meals-image.jpg";
 import gangnamLogo from "../../assets/gangnam-logo.png";
 
-const Header = () => {
+const Header = ({ onOpenModal }) => {
   return (
     <>
       <header className={classes.header}>
@@ -13,7 +13,7 @@ const Header = () => {
         <a href="/">
           <img src={gangnamLogo} alt="Gangnam restaurant logo." />
         </a>
-        <HeaderCartButton />
+        <HeaderCartButton onOpenModal={onOpenModal} />
       </header>
       <div className={classes["main-image"]}>
         <img src={mealsImage} alt="A table full of delicious Korean food." />
