@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Header from "./components/Layout/Header";
 import Meals from "./components/Meals/Meals";
-import Modal from "./components/UI/Modal";
+import Cart from "./components/Cart/Cart";
 
 function App() {
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -16,7 +16,7 @@ function App() {
 
   return (
     <>
-      {isOpenModal && <Modal onCloseModal={handleCloseModal} />}
+      {isOpenModal && <Cart onCloseModal={handleCloseModal} />}
       <Header onOpenModal={handleOpenModal} />
       <main>
         <Meals />
