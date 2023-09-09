@@ -53,7 +53,11 @@ const Cart = ({ onCloseModal }) => {
         <button className={classes["button--alt"]} onClick={onCloseModal}>
           Close
         </button>
-        {hasItem ? <button className={classes.button}>Order</button> : ""}
+        {hasItem ? (
+          <button className={classes.button}>Order</button>
+        ) : (
+          <button className={classes["button--disabled"]}>Order</button>
+        )}
       </div>
     </Modal>
   );

@@ -36,3 +36,15 @@
   background-color: #8a2b06;
   color: white;
 }
+
+.actions .button--disabled {
+  background-color: grey;
+  color: white;
+  border: 1px solid grey;
+}
+
+.actions .button--disabled:hover {
+  background-color: grey;
+  color: white;
+  border: 1px solid grey;
+}
