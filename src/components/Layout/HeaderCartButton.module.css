@@ -36,11 +36,11 @@
   background-color: #92320c;
 }
 
-.bump {
-  animation: bump 300ms ease-out;
+.boing {
+  animation: boing 300ms ease-out;
 }
 
-@keyframes bump {
+@keyframes boing {
   0% {
     transform: scale(1);
   }
