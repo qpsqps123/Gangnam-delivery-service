@@ -54,7 +54,12 @@ const Cart = ({ onCloseModal }) => {
           Close
         </button>
         {hasItem ? (
-          <button className={classes.button}>Order</button>
+          <button
+            className={classes.button}
+            onClick={() => console.log("Ordered!")}
+          >
+            Order
+          </button>
         ) : (
           <button className={classes["button--disabled"]}>Order</button>
         )}
