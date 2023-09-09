@@ -20,7 +20,7 @@ const Cart = ({ onCloseModal }) => {
   };
 
   const cartItems = (
-    <ul>
+    <ul className={classes["cart-items"]}>
       {cartCtx.items.map((item) => (
         <CartItem
           key={item.id}
