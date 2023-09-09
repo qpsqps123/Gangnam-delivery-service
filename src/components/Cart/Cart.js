@@ -3,11 +3,12 @@ import CartItem from "./CartItem";
 
 import classes from "./Cart.module.css";
 
-import DUMMY_MENU from "../../dummy-menu";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import CartContext from "../../store/cart-context";
 
 const Cart = ({ onCloseModal }) => {
+  const [hasItem, setHasItem] = useState(false);
+
   const cartCtx = useContext(CartContext);
 
   const handleAddCartItem = (item) => {
@@ -33,6 +34,14 @@ const Cart = ({ onCloseModal }) => {
     </ul>
   );
 
+  useEffect(() => {
+    if (cartCtx.items.length === 0) {
+      setHasItem(false);
+    } else {
+      setHasItem(true);
+    }
+  }, [cartCtx.items.length]);
+
   return (
     <Modal onCloseModal={onCloseModal}>
       {cartItems}
@@ -44,7 +53,7 @@ const Cart = ({ onCloseModal }) => {
         <button className={classes["button--alt"]} onClick={onCloseModal}>
           Close
         </button>
-        <button className={classes.button}>Order</button>
+        {hasItem ? <button className={classes.button}>Order</button> : ""}
       </div>
     </Modal>
   );
