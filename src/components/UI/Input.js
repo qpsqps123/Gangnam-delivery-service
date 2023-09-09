@@ -1,8 +1,10 @@
 import { forwardRef } from "react";
 
+import classes from "./Input.module.css";
+
 const Input = forwardRef(function Input({ input, label }, ref) {
   return (
-    <div>
+    <div className={classes.input}>
       <label htmlFor={input.id}>{label}</label>
       <input ref={ref} {...input} />
     </div>
