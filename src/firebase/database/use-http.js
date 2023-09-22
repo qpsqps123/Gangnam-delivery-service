@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 const useHttp = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -12,7 +12,7 @@ const useHttp = () => {
    * @param {object} applyData.data applyData 함수의 첫 번째 인자로 전달되는 값이며, 본 함수의 반환 값입니다.
    * @returns {object} 통신 성공 시 응답받는 json 데이터를 자바스크립트 객체로 변환한 값입니다.
    */
-  const sendRequest = async (fetchInfo, applyData) => {
+  const sendRequest = useCallback(async (fetchInfo, applyData) => {
     try {
       setIsLoading(true);
       const response = await fetch(fetchInfo.url, {
@@ -37,7 +37,7 @@ const useHttp = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   return {
     isLoading,
