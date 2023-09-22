@@ -30,8 +30,6 @@ const useHttp = () => {
       const data = await response.json();
 
       applyData(data);
-
-      return data;
     } catch (err) {
       setError(err.message || "Error is occurred.");
     } finally {
