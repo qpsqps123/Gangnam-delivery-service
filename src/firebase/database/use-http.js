@@ -8,9 +8,8 @@ const useHttp = () => {
    * fetchAPI와 http를 사용해 백엔드와 통신합니다.
    *
    * @param {string|object} fetchInfo fetchAPI에 인자로 전달할 데이터입니다. 데이터 형식은 객체입니다. 키 구성은 url, method, headers, body입니다. body값은 JSON.stringfy()에 인자로 전달됩니다.
-   * @param {function(object)} [applyData] (옵션) 반환 값을 사용해 추가로 실행할 로직을 담은 함수를 전달합니다.
-   * @param {object} applyData.data applyData 함수의 첫 번째 인자로 전달되는 값이며, 본 함수의 반환 값입니다.
-   * @returns {object} 통신 성공 시 응답받는 json 데이터를 자바스크립트 객체로 변환한 값입니다.
+   * @param {function(object)} applyData 응답받은 값을 사용해 추가 로직을 실행하는 콜백함수입니다.
+   * @param {object} applyData.data 통신 성공 시 응답받는 값입니다. applyData 함수의 인자로 전달됩니다.
    */
   const sendRequest = useCallback(async (fetchInfo, applyData) => {
     try {
