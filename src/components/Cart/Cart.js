@@ -1,10 +1,11 @@
-import Modal from "../UI/Modal";
-import CartItem from "./CartItem";
+import { useContext, useEffect, useState } from "react";
+import CartContext from "../../store/cart-context";
 
 import classes from "./Cart.module.css";
 
-import { useContext, useEffect, useState } from "react";
-import CartContext from "../../store/cart-context";
+import Modal from "../UI/Modal";
+import CartItem from "./CartItem";
+import Checkout from "./Checkout";
 
 const Cart = ({ onCloseModal }) => {
   const [hasItem, setHasItem] = useState(false);
@@ -49,17 +50,13 @@ const Cart = ({ onCloseModal }) => {
         <span>Total Amount</span>
         <span>$ {cartCtx.totalAmount}</span>
       </div>
+      <Checkout />
       <div className={classes.actions}>
         <button className={classes["button--alt"]} onClick={onCloseModal}>
           Close
         </button>
         {hasItem ? (
-          <button
-            className={classes.button}
-            onClick={() => console.log("Ordered!")}
-          >
-            Order
-          </button>
+          <button className={classes.button}>Order</button>
         ) : (
           <button className={classes["button--disabled"]}>Order</button>
         )}
