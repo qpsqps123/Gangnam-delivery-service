@@ -9,6 +9,7 @@ import Checkout from "./Checkout";
 
 const Cart = ({ onCloseModal }) => {
   const [hasItem, setHasItem] = useState(false);
+  const [isCheckout, setIsCheckout] = useState(false);
 
   const cartCtx = useContext(CartContext);
 
@@ -18,6 +19,10 @@ const Cart = ({ onCloseModal }) => {
 
   const handleRemoveCartItem = (id) => {
     cartCtx.removeItem(id);
+  };
+
+  const orderHandler = () => {
+    setIsCheckout(true);
   };
 
   const cartItems = (
@@ -35,6 +40,21 @@ const Cart = ({ onCloseModal }) => {
     </ul>
   );
 
+  const modalAction = (
+    <div className={classes.actions}>
+      <button className={classes["button--alt"]} onClick={onCloseModal}>
+        Close
+      </button>
+      {hasItem ? (
+        <button className={classes.button} onClick={orderHandler}>
+          Order
+        </button>
+      ) : (
+        <button className={classes["button--disabled"]}>Order</button>
+      )}
+    </div>
+  );
+
   useEffect(() => {
     if (cartCtx.items.length === 0) {
       setHasItem(false);
@@ -50,17 +70,8 @@ const Cart = ({ onCloseModal }) => {
         <span>Total Amount</span>
         <span>$ {cartCtx.totalAmount}</span>
       </div>
-      <Checkout />
-      <div className={classes.actions}>
-        <button className={classes["button--alt"]} onClick={onCloseModal}>
-          Close
-        </button>
-        {hasItem ? (
-          <button className={classes.button}>Order</button>
-        ) : (
-          <button className={classes["button--disabled"]}>Order</button>
-        )}
-      </div>
+      {isCheckout && <Checkout />}
+      {!isCheckout && modalAction}
     </Modal>
   );
 };
