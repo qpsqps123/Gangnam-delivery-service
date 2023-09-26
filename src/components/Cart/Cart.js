@@ -70,7 +70,7 @@ const Cart = ({ onCloseModal }) => {
         <span>Total Amount</span>
         <span>$ {cartCtx.totalAmount}</span>
       </div>
-      {isCheckout && <Checkout />}
+      {isCheckout && <Checkout onCancel={onCloseModal} />}
       {!isCheckout && modalAction}
     </Modal>
   );
