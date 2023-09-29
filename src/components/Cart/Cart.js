@@ -3,6 +3,8 @@ import CartContext from "../../store/cart-context";
 
 import classes from "./Cart.module.css";
 
+import useHttp from "../../firebase/database/use-http";
+
 import Modal from "../UI/Modal";
 import CartItem from "./CartItem";
 import Checkout from "./Checkout";
@@ -12,6 +14,8 @@ const Cart = ({ onCloseModal }) => {
   const [isCheckout, setIsCheckout] = useState(false);
 
   const cartCtx = useContext(CartContext);
+
+  const { sendRequest: postOrder } = useHttp();
 
   const handleAddCartItem = (item) => {
     cartCtx.addItem({ ...item, amount: 1 });
@@ -23,6 +27,15 @@ const Cart = ({ onCloseModal }) => {
 
   const orderHandler = () => {
     setIsCheckout(true);
+  };
+
+  const submitOrderHandler = async (userData) => {
+    await postOrder({
+      url: "https://gangnam-delivery-service-default-rtdb.asia-southeast1.firebasedatabase.app/gangnam/orders.json",
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: { user: userData, orderedItems: cartCtx.items },
+    });
   };
 
   const cartItems = (
@@ -70,7 +83,9 @@ const Cart = ({ onCloseModal }) => {
         <span>Total Amount</span>
         <span>$ {cartCtx.totalAmount}</span>
       </div>
-      {isCheckout && <Checkout onCancel={onCloseModal} />}
+      {isCheckout && (
+        <Checkout onCancel={onCloseModal} onConfirm={submitOrderHandler} />
+      )}
       {!isCheckout && modalAction}
     </Modal>
   );

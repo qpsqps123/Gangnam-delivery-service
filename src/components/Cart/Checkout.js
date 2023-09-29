@@ -5,7 +5,7 @@ import classes from "./Checkout.module.css";
 const isEmpty = (value) => value.trim() === "";
 const isFiveChars = (value) => value.trim().length === 5;
 
-const Checkout = ({ onCancel }) => {
+const Checkout = ({ onCancel, onConfirm }) => {
   const [formInputsValidity, setFormInputsValidity] = useState({
     name: true,
     street: true,
@@ -47,6 +47,13 @@ const Checkout = ({ onCancel }) => {
     if (!FormIsVaild) {
       return;
     }
+
+    onConfirm({
+      name: enteredName,
+      street: enteredStreet,
+      postalCode: enteredPostalCode,
+      city: enteredCity,
+    });
   };
 
   const inputInfo = [
@@ -63,30 +70,28 @@ const Checkout = ({ onCancel }) => {
     city: <p>Please enter a valid city!</p>,
   };
 
-  const inputList = inputInfo.map((element, index) => {
-    return (
-      <>
-        <Input
-          key={element.id}
-          ref={(el) => (inputRef.current[index] = el)}
-          className={`${classes.control} ${
-            formInputsValidity[element.id] ? "" : classes.invalid
-          }`}
-          label={element.label}
-          input={{ id: element.id, type: "text" }}
-        />
-        {element.id === "name" && !formInputsValidity[element.id]
-          ? errorMessage.name
-          : element.id === "street" && !formInputsValidity[element.id]
-          ? errorMessage.street
-          : element.id === "postalCode" && !formInputsValidity[element.id]
-          ? errorMessage.postalCode
-          : element.id === "city" && !formInputsValidity[element.id]
-          ? errorMessage.city
-          : ""}
-      </>
-    );
-  });
+  const inputList = inputInfo.map((element, index) => (
+    <>
+      <Input
+        key={element.id}
+        ref={(el) => (inputRef.current[index] = el)}
+        className={`${classes.control} ${
+          formInputsValidity[element.id] ? "" : classes.invalid
+        }`}
+        label={element.label}
+        input={{ id: element.id, type: "text" }}
+      />
+      {element.id === "name" && !formInputsValidity[element.id]
+        ? errorMessage.name
+        : element.id === "street" && !formInputsValidity[element.id]
+        ? errorMessage.street
+        : element.id === "postalCode" && !formInputsValidity[element.id]
+        ? errorMessage.postalCode
+        : element.id === "city" && !formInputsValidity[element.id]
+        ? errorMessage.city
+        : ""}
+    </>
+  ));
 
   return (
     <form className={classes.form} onSubmit={confirmHandler}>
