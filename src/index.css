@@ -12,6 +12,31 @@ body {
   margin: 0;
 }
 
+::-webkit-scrollbar {
+  width: 13px;
+}
+
+::-webkit-scrollbar-track {
+  border: 2px transparent #fff;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  background-clip: padding-box;
+  border-radius: 10px;
+  border: 2px solid transparent;
+}
+
+::-webkit-scrollbar-button:vertical:start:decrement {
+  display: block;
+  height: 0.5rem;
+}
+
+::-webkit-scrollbar-button:vertical:end:decrement {
+  display: block;
+  height: 0.5rem;
+}
+
 .a11y-hidden {
   margin: 0;
   position: absolute;
