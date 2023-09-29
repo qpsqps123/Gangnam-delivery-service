@@ -12,10 +12,11 @@ import Checkout from "./Checkout";
 const Cart = ({ onCloseModal }) => {
   const [hasItem, setHasItem] = useState(false);
   const [isCheckout, setIsCheckout] = useState(false);
+  const [didSubmit, setDidSubmit] = useState(false);
 
   const cartCtx = useContext(CartContext);
 
-  const { sendRequest: postOrder } = useHttp();
+  const { isLoading, error, sendRequest: postOrder } = useHttp();
 
   const handleAddCartItem = (item) => {
     cartCtx.addItem({ ...item, amount: 1 });
@@ -36,6 +37,8 @@ const Cart = ({ onCloseModal }) => {
       headers: { "Content-Type": "application/json" },
       body: { user: userData, orderedItems: cartCtx.items },
     });
+
+    setDidSubmit(true);
   };
 
   const cartItems = (
@@ -76,8 +79,8 @@ const Cart = ({ onCloseModal }) => {
     }
   }, [cartCtx.items.length]);
 
-  return (
-    <Modal onCloseModal={onCloseModal}>
+  const isLoaded = (
+    <>
       {cartItems}
       <div className={classes.total}>
         <span>Total Amount</span>
@@ -87,6 +90,24 @@ const Cart = ({ onCloseModal }) => {
         <Checkout onCancel={onCloseModal} onConfirm={submitOrderHandler} />
       )}
       {!isCheckout && modalAction}
+    </>
+  );
+
+  return (
+    <Modal onCloseModal={onCloseModal}>
+      {!isLoading && !didSubmit && isLoaded}
+      {isLoading && <p>Loading...</p>}
+      {error && <p>Error is occured!</p>}
+      {!isLoading && didSubmit && (
+        <>
+          <p>Successfully sent the order!</p>
+          <div className={classes.actions}>
+            <button className={classes["button--alt"]} onClick={onCloseModal}>
+              Close
+            </button>
+          </div>
+        </>
+      )}
     </Modal>
   );
 };
