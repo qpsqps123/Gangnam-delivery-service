@@ -3,9 +3,18 @@ import Input from "../UI/Input";
 import classes from "./Checkout.module.css";
 
 const Checkout = ({ onCancel }) => {
+  const inputRef = useRef([]);
+
   const confirmHandler = (e) => {
     e.preventDefault();
     console.log("submitted!");
+
+    const enteredName = inputRef.current[0].value;
+    const enteredStreet = inputRef.current[1].value;
+    const enteredPostal = inputRef.current[2].value;
+    const enteredCity = inputRef.current[3].value;
+
+    console.log(enteredName, enteredStreet, enteredPostal, enteredCity);
   };
 
   const inputInfo = [
@@ -15,10 +24,11 @@ const Checkout = ({ onCancel }) => {
     { id: "city", label: "City" },
   ];
 
-  const inputList = inputInfo.map((element) => {
+  const inputList = inputInfo.map((element, index) => {
     return (
       <Input
         key={element.id}
+        ref={(el) => (inputRef.current[index] = el)}
         className={classes.control}
         label={element.label}
         input={{ id: element.id, type: "text" }}
