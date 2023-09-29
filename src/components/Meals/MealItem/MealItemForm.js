@@ -30,6 +30,7 @@ const MealItemForm = ({ id, onAddItem }) => {
     <form className={classes.form} onSubmit={handleSubmit}>
       <Input
         ref={inputRef}
+        className={classes.input}
         label="Amount"
         input={{
           id: "amount_" + id,
