@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import Input from "../UI/Input";
 import classes from "./Checkout.module.css";
 
@@ -71,9 +71,8 @@ const Checkout = ({ onCancel, onConfirm }) => {
   };
 
   const inputList = inputInfo.map((element, index) => (
-    <>
+    <Fragment key={element.id}>
       <Input
-        key={element.id}
         ref={(el) => (inputRef.current[index] = el)}
         className={`${classes.control} ${
           formInputsValidity[element.id] ? "" : classes.invalid
@@ -90,7 +89,7 @@ const Checkout = ({ onCancel, onConfirm }) => {
         : element.id === "city" && !formInputsValidity[element.id]
         ? errorMessage.city
         : ""}
-    </>
+    </Fragment>
   ));
 
   return (
