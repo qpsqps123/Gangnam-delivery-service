@@ -102,7 +102,7 @@ const Cart = ({ onCloseModal }) => {
         <>
           <p>Successfully sent the order!</p>
           <div className={classes.actions}>
-            <button className={classes["button--alt"]} onClick={onCloseModal}>
+            <button className={classes.button} onClick={onCloseModal}>
               Close
             </button>
           </div>
