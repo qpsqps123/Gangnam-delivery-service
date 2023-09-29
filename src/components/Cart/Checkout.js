@@ -1,3 +1,5 @@
+import { useRef } from "react";
+import Input from "../UI/Input";
 import classes from "./Checkout.module.css";
 
 const Checkout = ({ onCancel }) => {
@@ -6,24 +8,27 @@ const Checkout = ({ onCancel }) => {
     console.log("submitted!");
   };
 
+  const inputInfo = [
+    { id: "name", label: "Your Name" },
+    { id: "street", label: "Street" },
+    { id: "postal", label: "Postal Code" },
+    { id: "city", label: "City" },
+  ];
+
+  const inputList = inputInfo.map((element) => {
+    return (
+      <Input
+        key={element.id}
+        className={classes.control}
+        label={element.label}
+        input={{ id: element.id, type: "text" }}
+      />
+    );
+  });
+
   return (
     <form className={classes.form} onSubmit={confirmHandler}>
-      <div className={classes.control}>
-        <label htmlFor="name">Your Name</label>
-        <input type="text" id="name" />
-      </div>
-      <div className={classes.control}>
-        <label htmlFor="street">Street</label>
-        <input type="text" id="street" />
-      </div>
-      <div className={classes.control}>
-        <label htmlFor="postal">Postal Code</label>
-        <input type="text" id="postal" />
-      </div>
-      <div className={classes.control}>
-        <label htmlFor="city">City</label>
-        <input type="text" id="city" />
-      </div>
+      {inputList}
       <div className={classes.actions}>
         <button type="button" onClick={onCancel}>
           Cancel
