@@ -39,6 +39,8 @@ const Cart = ({ onCloseModal }) => {
     });
 
     setDidSubmit(true);
+
+    cartCtx.clearCart();
   };
 
   const cartItems = (
