@@ -17,14 +17,11 @@ const Checkout = ({ onCancel, onConfirm }) => {
 
   const confirmHandler = (e) => {
     e.preventDefault();
-    console.log("submitted!");
 
     const enteredName = inputRef.current[0].value;
     const enteredStreet = inputRef.current[1].value;
     const enteredPostalCode = inputRef.current[2].value;
     const enteredCity = inputRef.current[3].value;
-
-    console.log(enteredName, enteredStreet, enteredPostalCode, enteredCity);
 
     const enteredNameIsValid = !isEmpty(enteredName);
     const enteredStreetIsValid = !isEmpty(enteredStreet);
